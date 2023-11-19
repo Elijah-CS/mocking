@@ -1,5 +1,8 @@
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.spy;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
@@ -7,20 +10,20 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Controller.class)
+@PrepareForTest({ Service.class, Controller.class })
 public class TestMain {
 
   @Test
   public void testMain() throws Exception {
-
-    System.out.println("hello");
 
     Service service = new Service();
     String action = service.doService();
 
     assertEquals("doing external act", action);
 
-    mockExternalTool();
+    System.out.println("----------------");
+
+    mockPrivate();
 
     service = new Service();
     action = service.doService();
@@ -28,11 +31,14 @@ public class TestMain {
     assertEquals("mock action", action);
   }
 
-  public void mockExternalTool() throws Exception {
-    ExternalTool tool = PowerMockito.mock(ExternalTool.class);
+  public void mockPrivate() throws Exception {
+    Controller controller = PowerMockito.spy(new Controller());
 
-    PowerMockito.when(tool.doAction()).thenReturn("mock action");
-    PowerMockito.whenNew(ExternalTool.class).withNoArguments().thenReturn(tool);
+    PowerMockito.doReturn("mock action")
+        .when(controller, PowerMockito.method(Controller.class, "helper"))
+        .withNoArguments();
+
+    PowerMockito.whenNew(Controller.class).withNoArguments().thenReturn(controller);
   }
 
 }
