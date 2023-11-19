@@ -19,8 +19,19 @@ dependencies {
 }
 
 test {
+    jvmArgs "--add-opens", "java.base/java.lang=ALL-UNNAMED"
+    jvmArgs "--add-opens", "java.base/java.util=ALL-UNNAMED"
+    jvmArgs "--add-opens", "java.base/java.io=ALL-UNNAMED"
+
     testLogging {
         outputs.upToDateWhen {false}
         showStandardStreams = true
     }
 }
+
+// subprojects {
+//     tasks.withType(Test).configureEach {
+//         useJUnitPlatform()
+//         jvmArgs = jvmArgs + ['--add-opens=java.base/java.lang=ALL-UNNAMED']
+//     }
+// }
