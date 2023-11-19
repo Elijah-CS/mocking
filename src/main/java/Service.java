@@ -1,6 +1,6 @@
 
 public class Service {
-  public void doService() {
+  public String doService() {
     System.out.println("doing service");
 
     ExternalTool tool = new ExternalTool();
@@ -8,5 +8,7 @@ public class Service {
     String action = tool.doAction();
 
     System.out.println(action);
+
+    return action;
   }
 }

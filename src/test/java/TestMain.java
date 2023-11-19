@@ -15,19 +15,24 @@ public class TestMain {
 
     System.out.println("hello");
 
-    doThing();
+    Service service = new Service();
+    String action = service.doService();
 
-    assertTrue(true);
+    assertEquals("doing external act", action);
+
+    mockExternalTool();
+
+    service = new Service();
+    action = service.doService();
+
+    assertEquals("mock action", action);
   }
 
-  public void doThing() throws Exception {
+  public void mockExternalTool() throws Exception {
     ExternalTool tool = PowerMockito.mock(ExternalTool.class);
 
     PowerMockito.when(tool.doAction()).thenReturn("mock action");
     PowerMockito.whenNew(ExternalTool.class).withNoArguments().thenReturn(tool);
-
-    Service service = new Service();
-    service.doService();
   }
 
 }
