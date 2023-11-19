@@ -7,7 +7,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(Service.class)
+@PrepareForTest(Controller.class)
 public class TestMain {
 
   @Test
