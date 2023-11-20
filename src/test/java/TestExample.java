@@ -12,6 +12,7 @@ import java.sql.Connection;
 
 import example.Adapter;
 import example.DBService;
+import example.DBTableType;
 import example.Processing;
 
 @RunWith(PowerMockRunner.class)
@@ -28,15 +29,15 @@ public class TestExample {
     Adapter adapter = new Adapter();
     String action = adapter.buildThing(service);
 
-    assertEquals("mock action", action);
+    assertEquals("mocked response", action);
   }
 
   private void mockPrivate() throws Exception {
     Processing processing = PowerMockito.spy(new Processing());
 
-    PowerMockito.doReturn("mock action")
-        .when(processing, PowerMockito.method(Processing.class, "actualWork", Connection.class))
-        .withArguments(any(Connection.class));
+    PowerMockito.doReturn("mocked response")
+        .when(processing, PowerMockito.method(Processing.class, "getTableData", Connection.class, DBTableType.class))
+        .withArguments(any(Connection.class), any(DBTableType.class));
 
     PowerMockito.whenNew(Processing.class).withNoArguments().thenReturn(processing);
   }

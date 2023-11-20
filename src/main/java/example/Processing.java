@@ -7,11 +7,11 @@ public class Processing {
 
     System.out.println("In processor buildThing");
 
-    String response = actualWork(conn);
+    String response = getTableData(conn, DBTableType.TABLE1);
     return response;
   }
 
-  protected String actualWork(Connection conn) throws Exception {
+  protected String getTableData(Connection conn, DBTableType tableType) throws Exception {
 
     System.out.println("In real method");
 
