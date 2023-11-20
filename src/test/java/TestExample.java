@@ -8,8 +8,9 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.sql.Connection;
+
 import example.Adapter;
-import example.Connection;
 import example.DBService;
 import example.Processing;
 
@@ -20,19 +21,9 @@ public class TestExample {
   @Test
   public void testMain() throws Exception {
 
-    // DBService service = new DBService();
     DBService service = mockService();
 
-    // Adapter adapter = new Adapter();
-    // String action = adapter.buildThing(service);
-
-    // assertEquals("doing external act", action);
-
-    // System.out.println("----------------");
-
     mockPrivate();
-
-    service = new DBService();
 
     Adapter adapter = new Adapter();
     String action = adapter.buildThing(service);

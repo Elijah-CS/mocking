@@ -1,8 +1,8 @@
 package example;
 
-public class Connection implements AutoCloseable {
+public class MyConnection implements AutoCloseable {
 
-  public Connection() throws Exception {
+  public MyConnection() throws Exception {
     // throw new Exception("Bad Connection");
   }
 
