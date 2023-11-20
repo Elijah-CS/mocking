@@ -2,7 +2,7 @@ package example;
 
 import java.sql.Connection;
 
-public class Adapter {
+public class Adapter implements DataAdapter {
   public String buildThing(DBService service) throws Exception {
     System.out.println("In Service");
 
