@@ -30,10 +30,3 @@ test {
         showStandardStreams = true
     }
 }
-
-// subprojects {
-//     tasks.withType(Test).configureEach {
-//         useJUnitPlatform()
-//         jvmArgs = jvmArgs + ['--add-opens=java.base/java.lang=ALL-UNNAMED']
-//     }
-// }
