@@ -14,25 +14,31 @@ public class TestLookup {
     int numLoops = 100000000;
 
     long start1 = Instant.now().toEpochMilli();
-    testNull(numLoops);
+    int numNull1 = testNull(numLoops);
     long after1 = Instant.now().toEpochMilli();
 
     System.out.println(after1 - start1);
+    System.out.println("num null1: " + numNull1);
 
     long start2 = Instant.now().toEpochMilli();
-    testOptional(numLoops);
+    int numNull2 = testOptional(numLoops);
     long after2 = Instant.now().toEpochMilli();
 
     System.out.println(after2 - start2);
+    System.out.println("num null2: " + numNull2);
 
   }
 
-  public void testNull(int numLoops) {
+  public int testNull(int numLoops) {
+
+    int numNull = 0;
 
     for (int i = 0; i < numLoops; i++) {
       Integer num = getNum();
 
       if (num != null) {
+        num.byteValue();
+        numNull++;
         continue;
       } else {
         continue;
@@ -40,21 +46,29 @@ public class TestLookup {
 
     }
 
+    return numNull;
+
   }
 
-  public void testOptional(int numLoops) {
+  public int testOptional(int numLoops) {
+
+    int numNull = 0;
 
     for (int i = 0; i < numLoops; i++) {
       Optional<Integer> num = getOptionalNum();
 
       if (num.isPresent()) {
         Integer a = num.get();
+        a.byteValue();
+        numNull++;
         continue;
       } else {
         continue;
       }
 
     }
+
+    return numNull;
 
   }
 
